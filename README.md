@@ -3,7 +3,8 @@
 ## 概要　
 このリポジトリは、確認テスト第2回の課題として作成した「果物の商品を管理するアプリケーション」です。
 Laravel と Docker を使用して、ローカル環境で動作する商品管理機能を構築しています。 
-マイグレーションとシーディングにより、初期データ（商品・季節・カテゴリ）を投入できるようになっています。
+マイグレーションとシーディングを通じて、商品・季節・カテゴリの初期データを自動生成できるようにしています。
+これにより、環境構築後すぐに動作確認が可能です。
 
 ---
 
@@ -34,25 +35,22 @@ cp .env.example .env
 php artisan key:generate
 ```
 
-### 5. View ファイルの作成（前回の内容なので、提出前に修正します）
-ユーザーが入力するお問い合わせフォーム画面や関連画面を作成しました。  
+### 5. View ファイルの作成
+商品管理機能に関連する画面を作成しました。  
 主なファイル:
-- `resources/views/inquiry/form.blade.php` （お問い合わせフォーム）
-- `resources/views/inquiry/confirm.blade.php` （確認画面）
-- `resources/views/inquiry/thanks.blade.php` （送信完了画面）
-- `resources/views/layouts/partials/header.blade.php` / `footer.blade.php` （共通レイアウト）
-- `resources/views/auth/login.blade.php` / `register.blade.php` （認証関連）
+- `resources/views/products/index.blade.php` （商品一覧画面）
+- `resources/views/products/create.blade.php` （商品登録画面）
+- `resources/views/products/show.blade.php` （商品詳細画面）
+- `resources/views/layouts/app.blade.php` （共通レイアウト）
 
-### 6. CSS ファイルの作成（前回の内容なので、提出前に修正します）
-フォームや各画面のデザインを整えるためのスタイルを作成しました。  
+### 6. CSS ファイルの作成
+商品管理画面のデザインを整えるために、ページごとにスタイルを作成しました。  
 主なファイル:
-- `public/css/form.css` （お問い合わせフォーム用）
-- `public/css/confirm.css` （確認画面用）
-- `public/css/thanks.css` （完了画面用）
-- `public/css/login.css` / `register.css` （認証画面用）
-- `public/css/admin.css` （管理画面用）
-- `public/css/sanitize.css` （リセット用）
-- `public/css/style.css` （共通スタイル）
+- `public/css/products.css` （商品一覧画面用）
+- `public/css/product-create.css` （商品登録画面用）
+- `public/css/product-detail.css` （商品詳細画面用）
+
+※ 共通スタイル用の `style.css` 、リセット用の `sanitize.css` は未作成ですが、必要に応じて追加可能です。
 
 ## 🛠 使用技術（この例で使われている環境）
 - PHP 8.2
@@ -117,7 +115,8 @@ php artisan key:generate
     商品と季節の多対多関係を登録
  
 ## 🌐 ローカル環境での確認用URL
-- アプリケーション: [http://localhost/](http://localhost/)
+- アプリケーション: [http://localhost/](http://localhost/)  
+  （商品一覧は [http://localhost/products](http://localhost/products) から確認できます）
 - phpMyAdmin: [http://localhost:8080/](http://localhost:8080/)
 
 ## 実装状況
@@ -125,52 +124,29 @@ php artisan key:generate
 - [x] Laravel プロジェクト作成
 - [x] モデル・マイグレーション作成（products, seasons, 中間テーブル）
 - [x] Seeder による初期データ投入（商品・季節・関連付け）
+- [x] Blade による画面作成（商品一覧・詳細・登録フォーム）
+- [x] バリデーション（商品登録フォームの入力チェック）
+- [x] エラーメッセージの表示整備（ユーザーにわかりやすいフィードバック）
+- [x] デザイン調整（レイアウトやスタイルの改善）
+- [ ] 商品検索機能（部分一致検索）
+- [ ] 商品並び替え機能（価格の高い順／低い順）
 
-## 今後の実装予定
-- [ ] Blade による画面作成（商品一覧・詳細・登録フォーム）
-- [ ] バリデーション実装（商品登録フォームの入力チェック）
-- [ ] エラーメッセージの表示整備（ユーザーにわかりやすいフィードバック）
-- [ ] デザイン調整（レイアウトやスタイルの改善）
-- [ ] テストコードの追加（ユニットテスト・Featureテスト）
-
-## 既知の問題（前回の内容なので、提出前に修正します）
-- `php artisan migrate:fresh --seed` 実行時に **migrations テーブル作成でエラー**が発生  
-- データベース自体は `utf8mb4` 設定済みだが、テーブル作成時にエンジン・照合順序でエラーが出る  
-- 時間の都合で完全解決には至らず、現状のまま提出  
-
-## 提出にあたって（前回の内容なので、提出前に修正します）
+## 提出にあたって
 - main ブランチにコミット済み  
-- `.env` や `vendor/` ディレクトリはセキュリティ・再現性の観点からコミットしていません。  
-
-## 動作確認（前回の内容なので、提出前に修正します）
-- アプリケーション: http://localhost/  
-- phpMyAdmin: http://localhost:8080/
+- `.env` や `vendor/` ディレクトリは、セキュリティ・再現性の観点からコミット対象外としています
 
 ### 商品画像のアップロード機能
 
-- 商品登録フォームでは、ローカルから画像ファイルを選択してアップロードできます。
-- アップロードされた画像は `storage/app/public/images` に保存され、DBには保存パスが記録されます。
-- 表示時には `asset('storage/' . $product->image)` を使用して、`public/storage` 経由で画像を表示しています。
+- 商品登録フォームからローカルの画像ファイルを選択してアップロードできます。
+- アップロードされた画像は `storage/app/public/images` に保存され、DBにはファイル名のみが保存されます。
+- 表示時には `asset('storage/' . $product->image)` を利用し、`public/storage` 経由で画像を参照しています。
 - 初回のみ `php artisan storage:link` を実行して、`storage` ディレクトリと `public` ディレクトリを接続する必要があります。
-
-### 商品登録フォームのバリデーション仕様
-
-- 商品画像が未選択の場合：`商品画像を登録してください`
-- 拡張子が `.png` または `.jpeg` 以外の場合：`「.png」または「.jpeg」形式でアップロードしてください`
-- 画像サイズが1MBを超える場合：`画像は1MB以内でアップロードしてください`
-- 商品説明は120文字以内で入力する必要があります。超過するとエラーメッセージが表示されます。
 
 ### ダミーデータの初期化について
 
 - `php artisan migrate:fresh --seed` を実行することで、productsテーブルのダミーデータ10件が再生成されます。
 - 登録テストで追加した商品データが混在している場合も、このコマンドで初期化できます。
 - Seederファイルは `database/seeders/ProductSeeder.php` に記述しています。
-
-### 商品登録テストの流れ（確認用）
-
-- 商品名・価格・説明・画像・季節を入力し、「登録」ボタンを押すことで商品が保存されます。
-- 登録後は一覧ページに遷移し、登録内容が表示されます。
-- バリデーションエラーが発生した場合は、該当項目にエラーメッセージが表示されます。
 
 ## ライセンス
 このリポジトリは学習・確認テスト用に作成したものであり、商用利用は想定していません。
