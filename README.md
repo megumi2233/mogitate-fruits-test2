@@ -60,23 +60,23 @@ php artisan key:generate
 - MySQL 8.0
 - Docker (nginx, php, mysql, phpmyadmin)
 
-## 🗂 ER図（このプロジェクトのデータ構造）（前回の内容なので、提出前に修正します）
+## 🗂 ER図（このプロジェクトのデータ構造）
 このアプリケーションのデータ構造を視覚的に把握するため、以下にER図を掲載しています。
 
-この図では、`contacts` テーブルが `categories` テーブルに属する「1対多」のリレーション（has_many）を矢印で表現しています。
-各テーブルは表形式（右揃え）で構成されており、主キー（PK）・外部キー（FK）の役割が明示されています。  
-また、`gender` カラムは仕様書に従い **tinyint 型（1: 男性、2: 女性）** として保存されます。
+この図では、`products` テーブルと `seasons` テーブルが「多対多」のリレーションで接続されており、  
+中間テーブル `product_season` によって関係が管理されています。  
+各テーブルは表形式（右揃え）で構成されており、主キー（PK）・外部キー（FK）の役割が明示されています。
 
-![ER図](assets/contact-form-er-v2.png)
+![ER図](assets/mogitate-fruits-test2-er.png)
 
 ※ 補足：
 1. 図は draw.io（diagrams.net）にて作成し、PNG形式で保存しています。
-2. 元データは `src/contact-form-er-v2.drawio` にて編集可能です。
-3. PNGファイルは assets/contact-form-er-v2.png に保存されています。
+2. 元データは `src/mogitate-fruits-test2-er.drawio` にて編集可能です。
+3. PNGファイルは `assets/mogitate-fruits-test2-er.png` に保存されています。  
    → READMEではこの画像を参照しています。
 4. 編集には [draw.io（diagrams.net）](https://app.diagrams.net/) を使用してください。  
 　 ローカルアプリまたはブラウザ版のどちらでも編集可能です。
-5. ER図の更新手順：drawioで編集 → PNG再出力 → assetsに上書き保存 → README確認
+5. ER図の更新手順：drawioで編集 → PNG再出力 → assetsに上書き保存 → README確認  
    ※GitHub上で画像が更新されない場合は、Shift+再読み込み（Ctrl+Shift+R）などでキャッシュを強制クリアしてください。
 
 ### データ仕様（要点）
