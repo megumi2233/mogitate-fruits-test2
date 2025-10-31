@@ -1,0 +1,227 @@
+.product-detail {
+    max-width: 800px;
+    margin: 40px auto;
+    padding: 20px;
+    background: #fff;
+    border-radius: 8px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}
+
+.form-group {
+    display: flex;
+    align-items: flex-start;
+    gap: 10px;
+    margin-bottom: 15px;
+    max-width: 100%;
+    /* 親幅を超えない */
+    box-sizing: border-box;
+}
+
+.form-group label {
+    width: 120px;
+    /* ラベルの幅を固定 */
+    flex-shrink: 0;
+    /* 縮まないようにする */
+    text-align: right;
+    /* ラベルを右寄せにすると見やすい */
+    margin-right: 10px;
+    /* input との間隔 */
+}
+
+.form-group input[type="text"],
+.form-group input[type="number"],
+.form-group input[type="file"],
+.form-group textarea {
+    flex: 1;
+    /* 残り幅を使う */
+    min-width: 0;
+    /* はみ出し防止のため必須 */
+    width: auto;
+    padding: 8px;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+    box-sizing: border-box;
+}
+
+.file-input {
+    display: none;
+    /* 標準のファイル選択UIを非表示にする */
+}
+
+.file-label {
+    display: inline-block;
+    padding: 6px 12px;
+    background-color: #eee;
+    border-radius: 4px;
+    cursor: pointer;
+}
+
+.current-filename {
+    margin-left: 10px;
+    font-size: 14px;
+    color: #333;
+}
+
+.current-image {
+    width: 100%;
+    height: auto;
+    margin-top: 10px;
+    margin: 0 auto;
+    /* 中央寄せしたい場合 */
+    display: block;
+    border-radius: 4px;
+}
+
+.form-group.seasons {
+    display: flex;
+    align-items: flex-start;
+    /* ← 上端を揃える */
+    flex-direction: row;
+}
+
+.season-options {
+    display: flex;
+    flex-direction: column;
+    /* ← 縦に並べる */
+    gap: 2px;
+    /* 春夏秋冬の間隔を狭める */
+    margin-top: 0;
+}
+
+.season-option {
+    display: flex;
+    align-items: center;
+    gap: 2px;
+    /* チェックボックスと文字の間隔 */
+    margin: 0;
+}
+
+.season-option:last-child {
+    margin-right: 0;
+}
+
+.season-options label {
+    margin: 0;
+    padding: 0;
+}
+
+.season-option input[type="checkbox"] {
+    margin: 0;
+    padding: 0;
+}
+
+.season-option span {
+    margin: 0;
+    padding: 0;
+}
+
+.product-actions {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 20px;
+    margin-top: 20px;
+}
+
+.btn {
+    padding: 8px 16px;
+    border-radius: 4px;
+    text-decoration: none;
+    border: none;
+    cursor: pointer;
+}
+
+.btn.save {
+    background-color: #FFD700;
+    /* ゴールド系の黄色 */
+    color: #333;
+    /* 文字色は濃いめで可読性UP */
+    font-weight: bold;
+}
+
+.btn.back {
+    background-color: #ddd;
+    color: #333;
+}
+
+.btn.delete {
+    background-color: #f44336;
+    color: #fff;
+    border: none;
+    border-radius: 50%;
+    /* 丸いボタン */
+    width: 40px;
+    height: 40px;
+    font-size: 18px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+}
+
+/* 画像と基本情報を横並びにする */
+.product-main {
+    display: flex;
+    gap: 20px;
+    /* 画像と情報の間隔 */
+    margin-bottom: 20px;
+    align-items: flex-start;
+    /* 上揃え */
+    flex-wrap: wrap;
+    /* 画面が狭いときは折り返す */
+}
+
+/* 左側の画像ブロック */
+.product-image-block {
+    flex: 0 0 40%;
+    width: 50%;
+}
+
+.product-image-block img {
+    display: block;
+    margin: 0 auto;
+    /* 左右の余白を自動にして中央寄せ */
+    max-width: 100%;
+    /* 枠をはみ出さないように */
+    height: auto;
+}
+
+/* 右側の情報ブロック */
+.product-info-block {
+    flex: 1;
+    /* 残りの幅を使う */
+    min-width: 0;
+    /* はみ出し防止のため必須 */
+}
+
+.product-image-block input[type="file"] {
+    margin-top: 15px;
+    /* 画像の下に余白をつけて下げる */
+}
+
+.product-info-block .form-group {
+    margin-bottom: 15px;
+    /* 情報同士の間隔を少し狭める */
+}
+
+.delete-form-inline {
+    display: inline-block;
+    /* 横並びにする */
+    margin: 0;
+}
+
+.actions-wrapper {
+    display: flex;
+    justify-content: center;
+    /* 真ん中に寄せる */
+    gap: 10px;
+    /* ボタンの間隔 */
+    margin-top: 20px;
+}
+
+.delete-wrapper {
+    display: flex;
+    justify-content: flex-end;
+    /* 右寄せ */
+    margin-top: 20px;
+}
